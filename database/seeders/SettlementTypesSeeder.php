@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Database\Seeders;
 
-use Illuminate\Http\Request;
+use App\Models\SettletmentTypes;
+use Illuminate\Database\Seeder;
 
-class TestController extends Controller
+class SettlementTypesSeeder extends Seeder
 {
-    public function index()
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
     {
         $settlementTypes = collect();
         if (($open = fopen(database_path() . "/zipcodes.csv", "r")) !== FALSE) {
@@ -20,6 +26,6 @@ class TestController extends Controller
             fclose($open);
         }
 
-        dd($settlementTypes);
+        SettletmentTypes::insert($settlementTypes->toArray());
     }
 }
