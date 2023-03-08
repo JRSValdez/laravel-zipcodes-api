@@ -11,4 +11,6 @@ class Settlement extends Model
     protected $fillable = [
         'name', 'zone_type', 'key', 'settlement_type_id'
     ];
+
+    protected $primaryKey = 'key';
 }

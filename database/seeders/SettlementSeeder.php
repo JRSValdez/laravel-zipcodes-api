@@ -39,6 +39,7 @@ class SettlementSeeder extends Seeder
                     ]);
                 }
             }
+            fclose($open);
         }
         ini_set('max_execution_time', 60);
 
