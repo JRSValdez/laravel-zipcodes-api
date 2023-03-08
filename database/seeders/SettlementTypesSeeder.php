@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\SettletmentTypes;
 use Illuminate\Database\Seeder;
+use UConverter;
 
 class SettlementTypesSeeder extends Seeder
 {
@@ -16,10 +17,14 @@ class SettlementTypesSeeder extends Seeder
     {
         $settlementTypes = collect();
         if (($open = fopen(database_path() . "/zipcodes.csv", "r")) !== FALSE) {
-            while (($row = fgetcsv($open, 1000, "|")) !== FALSE) {
+            $now = date("Y-m-d H:i:s", strtotime('now'));
+            while (($row = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $name = $row[2];
                 if (!$settlementTypes->contains('name', $name)) {
-                    $settlementTypes->add(['name' => $name]);
+                    $settlementTypes->add([
+                        'name' => $name,
+                        'created_at' => $now
+                    ]);
                 }
             }
 
