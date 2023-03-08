@@ -13,4 +13,9 @@ class Settlement extends Model
     ];
 
     protected $primaryKey = 'key';
+
+    public function settlement_type()
+    {
+        return $this->belongsTo(SettletmentTypes::class, 'settlement_type_id', 'id');
+    }
 }

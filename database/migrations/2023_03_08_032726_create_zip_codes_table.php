@@ -16,7 +16,10 @@ class CreateZipCodesTable extends Migration
         Schema::create('zip_codes', function (Blueprint $table) {
             $table->id();
             $table->string('code', 10);
-            $table->text('settlements')->nullable();
+            $table->string('locality', 100);
+            $table->text('settlements');
+            $table->unsignedBigInteger('federal_entity_id');
+            $table->foreign('federal_entity_id')->references('id')->on('federal_entities')->onDelete('cascade');
             $table->unsignedBigInteger('municipality_id');
             $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade');
             $table->timestamps();

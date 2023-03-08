@@ -20,30 +20,33 @@ class SettlementSeeder extends Seeder
         $allSTypes = SettletmentTypes::get();
         ini_set('max_execution_time', 180);
         if (($open = fopen(database_path() . "/zipcodes.csv", "r")) !== FALSE) {
-            $cont = 0;
+            $now = date("Y-m-d H:i:s", strtotime('now'));
             while (($row = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $name = $row[1];
                 $key = intval($row[12]);
                 $zone_type = $row[13];
                 $settlement_type_name = $row[2];
-                $cont = $cont + 1;
-                if (!in_array($key, $keysArray)) {
-                    array_push($keysArray, $key);
+                $municipalityKey = intval($row[11]);
+                $id = intval($key . $municipalityKey);
+                if (!isset($settlements[$id])) {
                     $sType = $allSTypes->where('name', $settlement_type_name)->first();
-                    array_push($settlements, [
+                    $settlements[$id] = [
                         'name' => $name,
                         'key' => $key,
                         'zone_type' => $zone_type,
                         'settlement_type_id' => $sType->id,
-                        'created_at' => date("Y-m-d H:i:s", strtotime('now'))
-                    ]);
+                        'municipality_id' => $municipalityKey,
+                        'created_at' => $now
+                    ];
                 }
             }
             fclose($open);
         }
-        ini_set('max_execution_time', 60);
 
+        $settlementsCollection = collect($settlements);
 
-        Settlement::insert($settlements);
+        foreach ($settlementsCollection->chunk(1000) as $chunk) {
+            Settlement::insert($chunk->toArray());
+        }
     }
 }

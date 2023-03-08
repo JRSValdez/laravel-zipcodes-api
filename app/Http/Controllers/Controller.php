@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /* Not Found Response */
+    protected function notFoundResponse()
+    {
+        $response = ['result' => false, 'message' => 'Zip code not found'];
+        return response()->json($response, 404);
+    }
 }

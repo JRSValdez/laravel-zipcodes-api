@@ -11,4 +11,6 @@ class SettletmentTypes extends Model
     protected $fillable = [
         'name'
     ];
+
+    protected $primaryKey = 'key';
 }

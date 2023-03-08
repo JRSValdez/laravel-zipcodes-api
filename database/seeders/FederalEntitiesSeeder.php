@@ -20,7 +20,6 @@ class FederalEntitiesSeeder extends Seeder
             $cont = 0;
             while (($row = fgetcsv($open, 1000, ",")) !== FALSE) {
                 if ($cont > 3) {
-
                     $name = $row[4];
                     $key = $row[7];
                     if (!$federalEntitties->contains('name', $name)) {
