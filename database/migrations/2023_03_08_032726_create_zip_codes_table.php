@@ -17,7 +17,6 @@ class CreateZipCodesTable extends Migration
             $table->id();
             $table->string('code', 10);
             $table->string('locality', 100);
-            $table->text('settlements');
             $table->unsignedBigInteger('federal_entity_id');
             $table->foreign('federal_entity_id')->references('id')->on('federal_entities')->onDelete('cascade');
             $table->unsignedBigInteger('municipality_id');

@@ -18,4 +18,9 @@ class Settlement extends Model
     {
         return $this->belongsTo(SettletmentTypes::class, 'settlement_type_id', 'id');
     }
+
+    public function zip_code()
+    {
+        return $this->belongsTo(ZipCode::class, 'zip_code', 'code');
+    }
 }

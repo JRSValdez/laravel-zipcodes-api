@@ -43,6 +43,12 @@ Para hacer una instalación local se necesita tener instalado docker y docker-co
 
 Este comando descargará una serie de librerías por lo que puede tardar unos minutos
 
+- Estando en la terminal dentro del contenedor "app" ejecutar el siguiente comando para generar la applicationkey
+
+```
+    php artisan key:generate
+```
+
 - Estando en la terminal dentro del contenedor "app" ejecutar el siguiente comando para correr las migraciones y hacer los inserts al base de datos
 
 ```

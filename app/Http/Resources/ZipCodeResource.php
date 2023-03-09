@@ -10,10 +10,7 @@ class ZipCodeResource extends JsonResource
 
     public function toArray($request)
     {
-        $settlements = Settlement::orderBy('key')
-            ->where('municipality_id', $this->municipality_id)
-            ->whereIn('key', explode(',', $this->settlements))
-            ->get();
+        $settlements = Settlement::where('zip_code', $this->code)->get();
         return [
             'zip_code' => $this->code,
             'locality' => $this->locality,

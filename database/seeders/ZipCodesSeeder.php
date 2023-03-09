@@ -22,18 +22,13 @@ class ZipCodesSeeder extends Seeder
                 $code = $row[0];
                 $settlementKey = intval($row[12]);
 
-                if (isset($codes[$code])) {
-                    $oldSettlements = $codes[$code]['settlements'];
-                    $oldSettlements = $oldSettlements . ',' . $settlementKey;
-                    $codes[$code]['settlements'] = $oldSettlements;
-                } else {
+                if (!isset($codes[$code])) {
                     $municipalityKey = intval($row[11]);
                     $federalEntityKey = intval($row[7]);
                     $locality = $row[5];
                     $codes[$code] = [
                         'code' => $code,
                         'locality' => $locality,
-                        'settlements' => $settlementKey,
                         'municipality_id' => $municipalityKey,
                         'federal_entity_id' => $federalEntityKey
                     ];

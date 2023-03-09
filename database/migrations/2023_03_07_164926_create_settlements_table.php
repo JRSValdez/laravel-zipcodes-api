@@ -20,8 +20,7 @@ class CreateSettlementsTable extends Migration
             $table->string('zone_type', 50);
             $table->unsignedBigInteger('settlement_type_id');
             $table->foreign('settlement_type_id')->references('id')->on('settlement_types')->onDelete('cascade');
-            $table->unsignedBigInteger('municipality_id');
-            $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade');
+            $table->string('zip_code', 20);
             $table->timestamps();
         });
     }

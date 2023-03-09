@@ -16,18 +16,19 @@ class SettlementSeeder extends Seeder
     public function run()
     {
         $settlements = [];
-        $keysArray = [];
         $allSTypes = SettletmentTypes::get();
+        ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 180);
         if (($open = fopen(database_path() . "/zipcodes.csv", "r")) !== FALSE) {
             $now = date("Y-m-d H:i:s", strtotime('now'));
             while (($row = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $name = $row[1];
+                $zipCode = $row[0];
                 $key = intval($row[12]);
                 $zone_type = $row[13];
                 $settlement_type_name = $row[2];
-                $municipalityKey = intval($row[11]);
-                $id = intval($key . $municipalityKey);
+                //$municipalityKey = intval($row[11]);
+                $id = $key . $zipCode;
                 if (!isset($settlements[$id])) {
                     $sType = $allSTypes->where('name', $settlement_type_name)->first();
                     $settlements[$id] = [
@@ -35,7 +36,7 @@ class SettlementSeeder extends Seeder
                         'key' => $key,
                         'zone_type' => $zone_type,
                         'settlement_type_id' => $sType->id,
-                        'municipality_id' => $municipalityKey,
+                        'zip_code' => $zipCode,
                         'created_at' => $now
                     ];
                 }

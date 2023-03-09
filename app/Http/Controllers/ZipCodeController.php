@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ZipCodeResource;
+use App\Models\Settlement;
+use App\Models\SettletmentTypes;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,7 @@ class ZipCodeController extends Controller
 {
     public function index(Request $request, string $zipCode)
     {
-        $zipCode = ZipCode::where('code', $zipCode)->with('municipality')->first();
+        $zipCode = ZipCode::where('code', $zipCode)->first();
         if ($zipCode) {
             $response = new ZipCodeResource($zipCode);
             return response()->json($response, 200, [
