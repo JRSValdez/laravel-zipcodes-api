@@ -11,8 +11,8 @@ class SettlementResource extends JsonResource
     {
         return [
             'key' => intval($this->key),
-            'name' => strtoupper($this->name),
-            'zone_type' => strtoupper($this->zone_type),
+            'name' => $this->name,
+            'zone_type' => $this->zone_type,
             'settlement_type' => new SettlementTypeResource($this->settlement_type),
         ];
     }

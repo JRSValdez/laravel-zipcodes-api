@@ -16,7 +16,7 @@ class ZipCodeResource extends JsonResource
             ->get();
         return [
             'zip_code' => $this->code,
-            'locality' => strtoupper($this->locality),
+            'locality' => $this->locality,
             'federal_entity' => new FederalEntityResource($this->federal_entity),
             'settlements' => SettlementResource::collection($settlements),
             'municipality' => new MunicipalityResource($this->municipality),

@@ -11,7 +11,7 @@ class FederalEntityResource extends JsonResource
     {
         return [
             'key' => intval($this->key),
-            'name' => strtoupper($this->name),
+            'name' => $this->name,
             'code' => $this->code != '' ? $this->code : null,
         ];
     }

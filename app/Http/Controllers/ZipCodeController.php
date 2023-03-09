@@ -13,7 +13,10 @@ class ZipCodeController extends Controller
         $zipCode = ZipCode::where('code', $zipCode)->with('municipality')->first();
         if ($zipCode) {
             $response = new ZipCodeResource($zipCode);
-            return response()->json($response);
+            return response()->json($response, 200, [
+                'Content-Type' => 'application/json;charset=UTF-8',
+                'Charset' => 'utf-8'
+            ], JSON_UNESCAPED_UNICODE);
         }
         return $this->notFoundResponse();
     }

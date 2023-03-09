@@ -1,64 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://www.backbonesystems.io/" target="_blank"><img src="https://assets.website-files.com/6318e08ac4910dc571c44f02/6318e2d9ffc55451438398bf_BackboneSystems_Blanco.svg" width="400"></a></p>
+<br />
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Backbone systems challenge
 
-## About Laravel
+Este proyecto esta hecho con fines de participar en un proceso de selección para la empresa backbone systems.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Tecnologías utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Laravel 8+](https://laravel.com).
+- Docker.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Pasos para instalación local
 
-## Learning Laravel
+Para hacer una instalación local se necesita tener instalado docker y docker-compose.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Descargar el código fuente
+- Ubicarse en la raíz del proyecto y duplicar y renombrar el archivo .env.example a .env
+- Una vez renombrado el archivo debemos de modificar el valor de las siguientes variables de entorno, colocando las credenciales para la base de datos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
+```
 
-## Laravel Sponsors
+- En la raíz del proyecto y ejecutar el siguiente comando:
+  ```
+  docker-compose up -d
+  ```
+  El comando anterior hará un pull de las imágenes a utilizar por lo que puede tardar unos minutos en ejecutarse
+- Una vez estén levantados los servicios de docker, debemos de ejecutar el siguiente comando para ubicarnos en la terminal del servicio "app"
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+    docker-compose exec app bash
+```
 
-### Premium Partners
+- Estando en la terminal dentro del contenedor "app" ejecutar el siguiente comando para instalar las dependencias
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```
+    composer install
+```
 
-## Contributing
+Este comando descargará una serie de librerías por lo que puede tardar unos minutos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Estando en la terminal dentro del contenedor "app" ejecutar el siguiente comando para correr las migraciones y hacer los inserts al base de datos
 
-## Code of Conduct
+```
+    php artisan migrate --seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Este comando creará todas las tablas y ejecutará los seeders llenando la base de datos, por lo que puede tardar unos minutos en ejecutarse
 
-## Security Vulnerabilities
+- Para finalizar, siempre en la terminal del contenedor "app", ejecutaremos los test unitarios para verificar que todo este funcionando perfectamente
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+    php artisan test
+```
 
-## License
+## Extras del aplicativo
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Test unitarios
+- Indexes en la base de datos para mejorar los tiempos de respuesta
+- respuesta JSON 404 al no encontrar el zip-code
+- Ambiente docker para test/desarrollo
