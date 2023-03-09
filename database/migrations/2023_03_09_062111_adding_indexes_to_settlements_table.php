@@ -14,7 +14,7 @@ class AddingIndexesToSettlementsTable extends Migration
     public function up()
     {
         Schema::table('settlements', function (Blueprint $table) {
-            $table->index(['key'], 'settlements_key_index');
+            $table->index(['zip_code'], 'settlements_zip_code_index');
         });
     }
 
