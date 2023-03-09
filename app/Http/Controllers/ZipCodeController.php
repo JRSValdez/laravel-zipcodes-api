@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ZipCodeResource;
-use App\Models\Settlement;
-use App\Models\SettletmentTypes;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
 
