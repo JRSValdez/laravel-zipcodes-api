@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'hello';
+    return '<h1>Backbone Systems challenge</h1>';
 });
