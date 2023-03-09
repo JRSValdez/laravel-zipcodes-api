@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Models\Settlement;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB;
 
 class ZipCodeResource extends JsonResource
 {
